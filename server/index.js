@@ -1,10 +1,10 @@
 const express = require("express"),
   cors = require("cors"),
   bodyParser = require("body-parser"),
-  port = 3001,
   app = express(),
   massive = require("massive");
 require("dotenv").config();
+const port = process.env.PORT || 3001;
 
 massive(process.env.CONNECTION_STRING)
   .then(dbInstance => {
