@@ -8,6 +8,14 @@ require("dotenv").config();
 
 massive(process.env.CONNECTION_STRING)
   .then(dbInstance => {
+    dbInstance
+      .run("select * from todos")
+      .then(c => {
+        if (!c.length) {
+          dbInstance.init_db();
+        }
+      })
+      .catch(dbInstance.init_db);
     app.set("db", dbInstance);
   })
   .catch(console.log);
