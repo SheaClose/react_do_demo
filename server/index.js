@@ -30,10 +30,10 @@ app.get("/api/todos", (req, res) => {
     .then(todos => res.json(todos));
 });
 
-app.use("/", express.static(__dirname + "/../build"));
-
+const path = require("path");
+app.use("/", express.static(path.join(__dirname, "../build")));
 app.get("*", (req, res) => {
-  res.sendFile(__dirname + "/../build");
+  res.sendFile(path.join(__dirname, "../build/index.html"));
 });
 
 app.listen(port, function() {
